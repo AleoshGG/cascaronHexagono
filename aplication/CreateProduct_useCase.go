@@ -11,6 +11,6 @@ func NewCreateProduct (db domain.IProduct) *CreateProduct {
 }
 
 // Run | Execute
-func (us *CreateProduct) Run () {
-	us.db.Save()
+func (us *CreateProduct) Run (product domain.Product) {
+	us.db.Save(product)
 }

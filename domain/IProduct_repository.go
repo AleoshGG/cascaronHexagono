@@ -1,6 +1,6 @@
 package domain
 
 type IProduct interface {
-	Save()
+	Save(product Product)
 	GetAll()
 }
