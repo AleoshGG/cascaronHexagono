@@ -25,10 +25,10 @@ func AddProduct(c *gin.Context) {
         return
     }
 
-	var product = domain.NewProduct(newProduct.Name, newProduct.Price)
+	var product = domain.NewProduct(0, newProduct.Name, newProduct.Price)
 
 	// Inyeccion mover
-	id, err := dependences.GetApp().Run(*product)
+	id, err := dependences.GetAppCreate().Run(*product)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{

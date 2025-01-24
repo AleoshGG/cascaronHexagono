@@ -8,7 +8,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
-var app *aplication.CreateProduct
+var appCreate *aplication.CreateProduct
+var appGetAll *aplication.GetAllProducts
 
 func GoDependences() {
 	godotenv.Load() // Cargar las variables de entorno
@@ -18,10 +19,16 @@ func GoDependences() {
 
 	// Instancia de mysql mover
 	conn := db.GetDBConnection()
-	app = aplication.NewCreateProduct(infrastructure.NewMySQL(*conn))
+	mysql := infrastructure.NewMySQL(*conn)
+	appCreate = aplication.NewCreateProduct(mysql)
+	appGetAll = aplication.NewGetAllProducts(mysql)
 }
 
-func GetApp() *aplication.CreateProduct {
-	return app
+func GetAppCreate() *aplication.CreateProduct {
+	return appCreate
+}
+
+func GetAppGetAll() *aplication.GetAllProducts {
+	return appGetAll
 }
 
