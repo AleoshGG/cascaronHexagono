@@ -4,21 +4,17 @@ import "fmt"
 
 type Product struct {
 	id    int32   
-	name  string  `json: "name"`
-	price float32 	`json: "price"`
+	name  string  
+	price float32 	
 }
 
 func NewProduct(name string, price float32) *Product {
 	// prod := Product{id: 1, name: name, price: price}
-	return &Product{id: 1, name: name, price: price}
+	return &Product{name: name, price: price}
 }
 
 func (p *Product) ViewProduct() string {
-	return fmt.Sprintf("id: %d name: %s price: %.2f", p.id, p.name, p.price)
-}
-
-func (p *Product) GetId() int32 {
-	return p.id
+	return fmt.Sprintf("name: %s price: %.2f", p.name, p.price)
 }
 
 func (p *Product) GetName() string {

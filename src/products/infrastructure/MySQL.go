@@ -3,17 +3,17 @@ package infrastructure
 import (
 	"fmt"
 	"log"
-	"practica/db"
-	"practica/domain"
+	"practica/src/products/domain"
+	"practica/src/core"
 )
 
 type MySQL struct{}
-
+//pasar la conexion
 func NewMySQL() *MySQL {
 	return &MySQL{}
 }
 
-func (mysql *MySQL) Save(product domain.Product) {
+func (mysql *MySQL) Save(product domain.Product)  {
 	
 	
 	conn := db.GetDBConnection()

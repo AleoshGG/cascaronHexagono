@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"practica/infrastructure/controllers"
+	"practica/src/products/infrastructure/controllers"
 
 	"github.com/gin-gonic/gin"
 )

@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"net/http"
-	"practica/aplication"
-	"practica/domain"
-	"practica/infrastructure"
+	"practica/src/products/aplication"
+	"practica/src/products/domain"
+	"practica/src/products/infrastructure"
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,13 +21,13 @@ func AddProduct(c *gin.Context) {
 
 	var product = domain.NewProduct(newProduct.Name, newProduct.Price)
 
-	// Instancia de mysql
+	// Instancia de mysql mover
 	var mysql = infrastructure.NewMySQL()
 
-	// Inyeccion
+	// Inyeccion mover
 	aplication.NewCreateProduct(mysql).Run(*product)
-
-
 
 	c.JSON(http.StatusCreated, "Hola jeje")
 }
+
+// Martin Fouler - Patrones de diseño para las arquitecturas

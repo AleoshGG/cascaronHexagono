@@ -1,8 +1,8 @@
 package main
 
 import (
-	"practica/db"
-	"practica/infrastructure/routes"
+	"practica/src/products/infrastructure/routes"
+	"practica/src/core"
 
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
