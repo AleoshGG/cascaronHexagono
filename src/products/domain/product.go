@@ -14,7 +14,7 @@ func NewProduct(name string, price float32) *Product {
 }
 
 func (p *Product) ViewProduct() string {
-	return fmt.Sprintf("name: %s price: %.2f", p.name, p.price)
+	return fmt.Sprintf(" name: %s price: %.2f", p.name, p.price)
 }
 
 func (p *Product) GetName() string {

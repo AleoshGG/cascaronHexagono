@@ -2,29 +2,29 @@ package infrastructure
 
 import (
 	"fmt"
-	"log"
 	"practica/src/products/domain"
-	"practica/src/core"
+
+	"github.com/go-mysql-org/go-mysql/client"
 )
 
-type MySQL struct{}
+type MySQL struct{
+	conn client.Conn
+}
 //pasar la conexion
-func NewMySQL() *MySQL {
-	return &MySQL{}
+func NewMySQL(conn client.Conn) *MySQL {
+	return &MySQL{conn: conn}
 }
 
-func (mysql *MySQL) Save(product domain.Product)  {
+func (mysql *MySQL) Save(product domain.Product) (uint64, error) {
 	
-	
-	conn := db.GetDBConnection()
-	query := "INSERT INTO products (id, name, price) VALUES (?, ?, ?)"
-	_, err := conn.Execute(query, product.GetId(), product.GetName(), product.GetPrice())
+	query := "INSERT INTO products (name, price) VALUES (?, ?)"
+	res, err := mysql.conn.Execute(query, product.GetName(), product.GetPrice())
 
 	if err != nil {
-		log.Fatal(err)
+		return 0, err
 	}
-
-	fmt.Println("Producto salvado" + product.ViewProduct())
+	
+	return res.InsertId, nil
 }
 
 func (mysql *MySQL) GetAll() {

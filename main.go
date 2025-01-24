@@ -1,18 +1,14 @@
 package main
 
 import (
+	"practica/dependences"
 	"practica/src/products/infrastructure/routes"
-	"practica/src/core"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 func main() {
-	godotenv.Load() // Cargar las variables de entorno
-
-	// Inicializar la conexión al iniciar el servidor
-	db.InitializeDatabase()
+	dependences.GoDependences()
 
 	// Configurar Gin
 	r := gin.Default()

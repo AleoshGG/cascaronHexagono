@@ -2,9 +2,8 @@ package controllers
 
 import (
 	"net/http"
-	"practica/src/products/aplication"
+	"practica/dependences"
 	"practica/src/products/domain"
-	"practica/src/products/infrastructure"
 
 	"github.com/gin-gonic/gin"
 )
@@ -21,13 +20,20 @@ func AddProduct(c *gin.Context) {
 
 	var product = domain.NewProduct(newProduct.Name, newProduct.Price)
 
-	// Instancia de mysql mover
-	var mysql = infrastructure.NewMySQL()
-
 	// Inyeccion mover
-	aplication.NewCreateProduct(mysql).Run(*product)
+	id, err := dependences.GetApp().Run(*product)
 
-	c.JSON(http.StatusCreated, "Hola jeje")
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"error": "No se pudo guardar el producto " + err.Error(),
+		})
+		return
+	}
+	
+	c.JSON(http.StatusCreated, gin.H{
+		"msg": "Creado",
+		"id": id,
+	})
 }
 
 // Martin Fouler - Patrones de diseño para las arquitecturas
