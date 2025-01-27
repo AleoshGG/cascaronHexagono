@@ -3,13 +3,29 @@ package controllers
 import (
 	"net/http"
 	"practica/dependences"
+	"practica/src/products/aplication"
 	"practica/src/products/domain"
+	"practica/src/products/infrastructure"
 
 	"github.com/gin-gonic/gin"
 )
 
+type CreateProductController struct{
+	mysql *infrastructure.MySQL
+	app *aplication.CreateProduct
+}
+
+func NewCreateProductController() *CreateProductController {
+	mysql := dependences.GetMySQL()
+	app := aplication.NewCreateProduct(mysql)
+	return &CreateProductController{
+		mysql: mysql,
+		app:   app,
+	}
+}
+
 // Crear un nuevo recurso
-func AddProduct(c *gin.Context) {
+func (cp_c *CreateProductController) AddProduct(c *gin.Context) {
 	
 	// Recuperacion del body 
 	var newProduct struct {
@@ -28,7 +44,7 @@ func AddProduct(c *gin.Context) {
 	var product = domain.NewProduct(0, newProduct.Name, newProduct.Price)
 
 	// Inyeccion mover
-	id, err := dependences.GetAppCreate().Run(*product)
+	id, err :=  cp_c.app.Run(*product)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{

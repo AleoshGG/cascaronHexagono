@@ -1,6 +1,6 @@
 package controllers
 
-import (
+/* import (
 	"fmt"
 	"net/http"
 	"practica/dependences"
@@ -22,4 +22,4 @@ func GetAllProducts(c *gin.Context) {
 	fmt.Print(res)
 
 	c.JSON(http.StatusOK, "Bien")
-}
+} */

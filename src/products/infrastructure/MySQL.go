@@ -1,16 +1,18 @@
 package infrastructure
 
 import (
+	db "practica/src/core"
 	"practica/src/products/domain"
 
 	"github.com/go-mysql-org/go-mysql/client"
 )
 
 type MySQL struct{
-	conn client.Conn
+	conn *client.Conn
 }
-//pasar la conexion
-func NewMySQL(conn client.Conn) *MySQL {
+
+func NewMySQL() *MySQL {
+	conn := db.GetDBConnection()
 	return &MySQL{conn: conn}
 }
 
