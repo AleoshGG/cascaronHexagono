@@ -2,6 +2,7 @@ package main
 
 import (
 	db "practica/src/core"
+	"practica/src/products/infrastructure/dependences"
 	"practica/src/products/infrastructure/routes"
 
 	"github.com/gin-gonic/gin"
@@ -13,6 +14,8 @@ func main() {
 
 	// Inicializar la conexión al iniciar el servidor
 	db.InitializeDatabase()
+
+	dependences.GoMySQL()
 
 	// Configurar Gin
 	r := gin.Default()

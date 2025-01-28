@@ -25,6 +25,10 @@ func (p *Product) GetPrice() float64 {
 	return p.price
 }
 
+func (p *Product) GetId() int64 {
+	return p.id
+}
+
 func (p *Product) SetId(id int64) {
 	p.id = id
 } 

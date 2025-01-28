@@ -11,5 +11,6 @@ func RegisterRoutes(r *gin.Engine) {
 	{
 		productsRoutes.POST("/add", controllers.NewCreateProductController().AddProduct)
 		productsRoutes.GET("/", controllers.NewGetAllProductsController().GetAllProducts)
+		productsRoutes.PUT("/:id", controllers.NewUpdateProductController().UpdateProduct)
 	}
 }

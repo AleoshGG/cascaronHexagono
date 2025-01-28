@@ -55,3 +55,15 @@ func (mysql *MySQL) GetAll() ([]domain.Product, error) {
 	return products, nil
 }
 
+func (mysql *MySQL) Update(product domain.Product) (uint64, error) {
+
+	query := "UPDATE products SET name = ?, price = ? WHERE id = ?"
+	res, err := mysql.conn.Execute(query, product.GetName(), product.GetPrice(), product.GetId())
+
+	if err != nil {
+		return 0, err
+	}
+
+	return res.AffectedRows, nil
+}
+

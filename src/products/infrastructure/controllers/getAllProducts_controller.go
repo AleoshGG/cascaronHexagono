@@ -3,7 +3,7 @@ package controllers
 import (
 	"fmt"
 	"net/http"
-	"practica/dependences"
+	"practica/src/products/infrastructure/dependences"
 	"practica/src/products/aplication"
 	"practica/src/products/infrastructure"
 
