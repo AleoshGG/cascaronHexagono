@@ -3,25 +3,20 @@ package controllers
 import (
 	"fmt"
 	"net/http"
-	"practica/src/products/infrastructure/dependences"
 	"practica/src/products/aplication"
-	"practica/src/products/infrastructure"
+	"practica/src/products/infrastructure/dependences"
 
 	"github.com/gin-gonic/gin"
 )
 
 type GetAllProductsController struct{
-	mysql *infrastructure.MySQL
 	app *aplication.GetAllProducts
 }
 
 func NewGetAllProductsController() *GetAllProductsController {
 	mysql := dependences.GetMySQL()
 	app := aplication.NewGetAllProducts(mysql)
-	return &GetAllProductsController{
-		mysql: mysql,
-		app:   app,
-	}
+	return &GetAllProductsController{app: app}
 }
 
 func (gp_c *GetAllProductsController) GetAllProducts(c *gin.Context) {

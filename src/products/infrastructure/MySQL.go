@@ -67,3 +67,15 @@ func (mysql *MySQL) Update(product domain.Product) (uint64, error) {
 	return res.AffectedRows, nil
 }
 
+func (mysql *MySQL) Delete(id int) (uint64, error) {
+	
+	query := "DELETE FROM products WHERE id = ?"
+	res, err := mysql.conn.Execute(query, id)
+
+	if err != nil {
+		return 0, err
+	}
+
+	return res.AffectedRows, nil
+}
+

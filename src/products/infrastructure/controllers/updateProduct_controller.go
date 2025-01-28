@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"practica/src/products/aplication"
 	"practica/src/products/domain"
-	"practica/src/products/infrastructure"
 	"practica/src/products/infrastructure/dependences"
 	"strconv"
 
@@ -12,7 +11,6 @@ import (
 )
 
 type UpdateProductController struct {
-	mysql *infrastructure.MySQL
 	app *aplication.UpdateProduct
 }
 
@@ -21,7 +19,7 @@ func NewUpdateProductController() *UpdateProductController {
 	mysql := dependences.GetMySQL()
 	app := aplication.NewUpdateProduct(mysql)
 
-	return &UpdateProductController{mysql: mysql, app: app}
+	return &UpdateProductController{app: app}
 }
 
 func (up_c *UpdateProductController) UpdateProduct (c *gin.Context) {

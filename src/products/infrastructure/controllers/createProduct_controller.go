@@ -5,23 +5,18 @@ import (
 	"practica/src/products/infrastructure/dependences"
 	"practica/src/products/aplication"
 	"practica/src/products/domain"
-	"practica/src/products/infrastructure"
 
 	"github.com/gin-gonic/gin"
 )
 
 type CreateProductController struct{
-	mysql *infrastructure.MySQL
 	app *aplication.CreateProduct
 }
 
 func NewCreateProductController() *CreateProductController {
 	mysql := dependences.GetMySQL()
 	app := aplication.NewCreateProduct(mysql)
-	return &CreateProductController{
-		mysql: mysql,
-		app:   app,
-	}
+	return &CreateProductController{app: app}
 }
 
 // Crear un nuevo recurso
