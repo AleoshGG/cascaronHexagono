@@ -10,6 +10,6 @@ func RegisterRoutes(r *gin.Engine) {
 	productsRoutes := r.Group("/products")
 	{
 		productsRoutes.POST("/add", controllers.NewCreateProductController().AddProduct)
-		//productsRoutes.GET("/", controllers.GetAllProducts)
+		productsRoutes.GET("/", controllers.NewGetAllProductsController().GetAllProducts)
 	}
 }

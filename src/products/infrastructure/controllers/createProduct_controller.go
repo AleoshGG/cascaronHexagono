@@ -30,7 +30,7 @@ func (cp_c *CreateProductController) AddProduct(c *gin.Context) {
 	// Recuperacion del body 
 	var newProduct struct {
 		Name string `json: name`
-		Price float32 `json: price`
+		Price float64 `json: price`
 	}
 
 	if err := c.ShouldBindJSON(&newProduct); err != nil {

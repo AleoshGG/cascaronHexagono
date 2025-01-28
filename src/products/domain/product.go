@@ -3,12 +3,12 @@ package domain
 import "fmt"
 
 type Product struct {
-	id    int32   
-	name  string  
-	price float32 	
+	id    int64  
+	name  string   
+	price float64 	
 }
 
-func NewProduct(id int32, name string, price float32) *Product {
+func NewProduct(id int64, name string, price float64) *Product {
 	// prod := Product{id: 1, name: name, price: price}
 	return &Product{id: id, name: name, price: price}
 }
@@ -21,11 +21,11 @@ func (p *Product) GetName() string {
 	return p.name
 }
 
-func (p *Product) GetPrice() float32 {
+func (p *Product) GetPrice() float64 {
 	return p.price
 }
 
-func (p *Product) SetId(id int32) {
+func (p *Product) SetId(id int64) {
 	p.id = id
 } 
 
@@ -33,6 +33,6 @@ func (p *Product) SetName(name string) {
 	p.name = name
 } 
 
-func (p *Product) SetPrice(price float32) {
+func (p *Product) SetPrice(price float64) {
 	p.price = price
 } 

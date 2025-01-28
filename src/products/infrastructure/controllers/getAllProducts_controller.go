@@ -1,15 +1,31 @@
 package controllers
 
-/* import (
+import (
 	"fmt"
 	"net/http"
 	"practica/dependences"
+	"practica/src/products/aplication"
+	"practica/src/products/infrastructure"
 
 	"github.com/gin-gonic/gin"
 )
 
-func GetAllProducts(c *gin.Context) {
-	res, err := dependences.GetAppGetAll().Run()
+type GetAllProductsController struct{
+	mysql *infrastructure.MySQL
+	app *aplication.GetAllProducts
+}
+
+func NewGetAllProductsController() *GetAllProductsController {
+	mysql := dependences.GetMySQL()
+	app := aplication.NewGetAllProducts(mysql)
+	return &GetAllProductsController{
+		mysql: mysql,
+		app:   app,
+	}
+}
+
+func (gp_c *GetAllProductsController) GetAllProducts(c *gin.Context) {
+	res, err := gp_c.app.Run()
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
@@ -18,8 +34,14 @@ func GetAllProducts(c *gin.Context) {
 		})
 		return
 	}
-
+	
 	fmt.Print(res)
 
-	c.JSON(http.StatusOK, "Bien")
-} */
+	c.JSON(http.StatusOK, gin.H{
+		"status": true,
+		"links": gin.H{
+			"self": "http://localhost:8080/products/",
+		},
+		"data": res,
+	})
+} 
