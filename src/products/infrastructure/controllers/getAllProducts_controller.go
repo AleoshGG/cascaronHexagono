@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"net/http"
 	"practica/src/products/aplication"
 	"practica/src/products/infrastructure/dependences"
@@ -29,14 +28,29 @@ func (gp_c *GetAllProductsController) GetAllProducts(c *gin.Context) {
 		})
 		return
 	}
-	
-	fmt.Print(res)
+
+	type product struct {
+		Id int64 `json: "id"`
+		Name string `json: "name"`
+		Price float64 `json: "price"`
+	}
+
+	var result []product
+
+	for _, row := range res {
+		var product product 
+		product.Id = row.GetId()
+		product.Name = row.GetName()
+		product.Price = row.GetPrice()
+		result = append(result, product)
+	}
+
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": true,
 		"links": gin.H{
 			"self": "http://localhost:8080/products/",
 		},
-		"data": res,
+		"data": result,
 	})
 } 
