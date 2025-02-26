@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	db "practica/src/core"
 	"practica/src/products/infrastructure/dependences"
 	"practica/src/products/infrastructure/routes"
@@ -22,6 +23,8 @@ func main() {
 
 	// Registrar rutas
 	routes.RegisterRoutes(r)
+
+	fmt.Print("Hola mundo")
 
 	// Iniciar el servidor
 	r.Run(":8080")
